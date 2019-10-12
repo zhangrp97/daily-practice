@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 原型链继承
+        function Animal(){
+            this.eat = function(){
+                console.log('animal eat')
+            }
+        }
+        function Lion(){
+            this.sleep = function(){
+                console.log('lion sleep')
+            }
+        }
+        // var lion = new Animal()
+        Lion.prototype = new Animal()
+        var rain = new Lion()
+        rain.eat() 
+        
+        // new一个对象的过程
+        // 
+        function Week(){
+            this.monday = 'monday so sleepy',
+            this.tuesday = 'tired'
+        }
+        var newWeek = new Week();
+        console.log(newWeek.monday)
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 晨训遗留，试一下window.open情况下 localstorage能否共享 -->
+    <a href="www.baidu.com" >test</a>
+    <button onclick="jump()">跳转</button>
+    <script>
+        localStorage.setItem('ss', 'sun')
+        function jump(){
+            window.open("www.baidu.com");
+        }
+    </script>
+</body>
+</html>

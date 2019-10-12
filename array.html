@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        let s = new Set(['foo', window]);
+        //  console.log(Array.from(s))   
+
+        // console.log(Array.from({length=5}, (v, i)=>i))
+
+        // 数组去重合并
+        function combine() {
+            let arr = [].concat.apply([], arguments);
+            return Array.from(new Set(arr))
+        }
+        const m = [1, 3, 2];
+        const n = [4, 2, 3];
+        // console.log(combine(m,n))
+
+        let arr1 = Array(7);
+        // console.log(arr1)
+
+        var array1 = ['a', 'b', 'c'];
+        var iterator1 = array1.entries();
+        console.log(iterator1.next());
+        // next()
+
+        // 二维数组按行排序
+
+
+        //使用for..of循环
+        var array2 = ['3','3','a']
+        var ite1 = array2.entries()
+        for (let i of ite1){
+            console.log(i)
+        }
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>this</title>
+</head>
+
+<body>
+    <script>
+        // 1.函数的调用，this == window
+        var x = 2;
+        function test() {
+            console.log(this.x);
+        }
+        test();
+
+        // 2.对象方法
+        var o1 = {
+            name: 'zhang',
+            fn1: function () {
+                console.log(this.name);
+            }
+        }
+        o1.fn1();
+
+        // 有好几层调用
+        var o2 = {
+            a: 10,
+            b: {
+                a: 1,
+                fn2: function () {
+                    console.log(this.a);
+                }
+            }
+        }
+        o2.b.fn2();
+
+
+        var o3 = {
+            a: 9,
+            d: {
+                a: 3,
+                fn() {
+                    console.log(this.a);
+                }
+            }
+        }
+        var m = o3.d.fn;
+        m();
+
+        // 
+        // function foo(){
+        //     console.log(this.a)
+        // }
+        // var obj = {
+        //     a:2,
+        //     foo: foo
+        // }
+        // var bar = obj.foo;
+        // var a = 'global a';
+        // bar();
+
+
+        // setTimeout  
+        function foo() {
+            console.log(this.a)
+        }
+        var obj = {
+            a: 100,
+            foo: foo
+        }
+        var a = 'window global';
+        setTimeout(obj.foo, 1000)
+        // function setTimeout(fn, delay){
+        // delay
+        //     fn()
+        // }
+
+        // 3.构造函数
+        function xx() {
+            this.x = 8;
+        }
+        var o4 = new xx();
+        console.log(o4.x);
+
+        // call、apply、bind 明确绑定
+        function foo() {
+            console.log(this.a)
+        }
+        var obj = {
+            a: 3
+        }
+        var bar = function () {
+            foo.call(obj)   
+        }
+        bar();
+        setTimeout(bar, 1000);
+        bar.call(window)
+
+
+        //箭头函数
+
+        // var foo = () => {
+        //     var a = '89'
+        //     console.log(this.a)
+        // }
+        
+        // function foo(){
+        //     return (a)=>{
+        //         console.log(a)
+        //     }
+        // } 
+        // var obj = {
+        //     a: 3,
+        //     foo: foo
+        // }
+        // var a = '99';
+        // setTimeout(obj.foo, 1000)
+
+
+        // setTimeout + 箭头函数
+        function foo() {
+            //返回箭头函数
+            return (a) => {
+                //this 继承自foo()
+                console.log(this.a);
+            };
+        }
+        var obj1 = {
+            a: 2
+        };
+        var obj2 = {
+            a: 3
+        };
+        var bar = foo.call(obj1);
+        bar.call(obj2);
+        // setTimeout(bar,1000)
+         
+
+        function foo() {
+            setTimeout(() => {
+                console.log('id:', this.id);
+            }, 100);
+        }
+        var id = 21;
+        foo.call({ id: 42 });
+        // 箭头函数this、类定义里的this
+
+    </script>
+</body>
+
+</html>

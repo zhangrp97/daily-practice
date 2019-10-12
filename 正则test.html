@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 校验一下65535的正则 -->
+    <input type="text" id="testInput" value=""  oninput="test()">
+    <p id="showText"></p>
+<script>
+    function test(){
+        var inputValue = document.getElementById('testInput').value;
+        var reg = /^((\d{1,4}|[1-6][0-5]{2}[0-3][0-5])\s){0,7}(\d{1,4}|[1-6][0-5]{2}[0-3][0-5]):((\d{1,4}|[1-6][0-5]{2}[0-3][0-5])\s){0,7}(\d{1,4}|[1-6][0-5]{2}[0-3][0-5])$/;
+        console.log(inputValue.match(reg))
+    }
+</script>
+</body>
+</html>
