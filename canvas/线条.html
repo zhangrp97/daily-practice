@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!--  没有实现 -->
+    <script src="./three.js"></script>
+    <script>
+    // render camera scene
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        var camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 1, 500);
+        camera.position.set(0, 0, 100);
+        camera.lookAt(0, 0, 0);
+
+        var scene = new THREE.Scene();
+
+        // 材质
+        var material = new THREE.LineBasicMaterial({color: 0x0000ff });
+
+        var geometry = new THREE.Geometry();
+ /*        geometry.vertices.push(new THREE.Vector3(-10, 0, 0));
+        geometry.vertices.push(new THREE.Vector3(0, 10, 0));
+        geometry.vertices.push(new THREE.Vector3(10, 0, 0)); */
+
+        geometry.vertices.push(new THREE.Vector3( -10, 0, 0) );
+        geometry.vertices.push(new THREE.Vector3( 0, 10, 0) );
+        geometry.vertices.push(new THREE.Vector3( 10, 0, 0) );
+        // 组合在一起形成一条线
+        var line = new THREE.Line(geometry, material);  
+
+        // 添加到场景中，并调用render函数
+        scene.add(line);
+        renderer.render(scene, camera);
+    </script>
+</body>
+</html>
