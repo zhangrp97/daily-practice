@@ -11,18 +11,32 @@
 <script>
     // 场景
     var scene = new THREE.Scene();
-    var geometry = new THREE.BoxGeometry(100, 100, 100);
+    /* var geometry = new THREE.BoxGeometry(100, 100, 100);
     var material = new THREE.MeshLambertMaterial({color:0x0000ff});
+    var mesh = new THREE.Mesh(geometry, material); */
+
+    var geometry = new THREE.BufferGeometry();
+    var vertices = new Float32Array([
+        -100.0, -100.0,  100.0,
+        100.0, -100.0,  100.0,
+        100.0,  100.0,  100.0,
+
+        100.0,  100.0,  100.0,
+        -100.0,  100.0,  100.0,
+        -100.0, -100.0,  100.0
+    ]);
+    geometry.addAttribute('position', new THREE.BufferAttribute(vertices, 3));
+    var material = new THREE.MeshBasicMaterial({color:0xff0000 });
     var mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 /*  点光源*/
 
 /*  环境光 */
-    var ambinet = new THREE.AmbientLight(0x444444);
+    /* var ambinet = new THREE.AmbientLight(0x444444);
     scene.add(ambinet);
     var point = new THREE.PointLight(0xffffff);
     point.position.set(150, 100, 100);
-    scene.add(point); 
+    scene.add(point);  */
 /*     var directionalLight = new THREE.DirectionalLight(0xffffff)
     scene.add(directionalLight) */
     // 相机
@@ -42,12 +56,12 @@
     renderer.render(scene, camera);
 
     // 让小球动起来
-    function render() {
+   /*  function render() {
         renderer.render(scene, camera);
         mesh.rotateY(0.01);
         requestAnimationFrame(render);
     }
-    render();
+    render(); */
 
 </script>
 </body>
