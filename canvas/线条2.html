@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>线条</title>
+</head>
+<body>
+    <script src="./three.js"></script>
+    <script>
+        var scene = new THREE.Scene();
+        var geometry = new THREE.Geometry();
+        var material = new THREE.LineBasicMaterial({
+            'vertexColors': THREE.VertexColors
+        });
+        var color1 = new THREE.Color(0x444444);
+        var color2 = new THREE.Color(0xFF0000);
+        var p1 = new THREE.Vector(-100, 0, 100);
+        var p2 = new THREE.Vector(100, 0, 100);
+        geometry.vertices.push(p1);
+        geometry.vertices.push(p2);
+        geometry.colors.push(color1, color2);
+        var line = new THREE.Line( geometry, material, THREE.LinePieces);
+        scene.add(line);
+    </script>
+</body>
+</html>
