@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        for(var i = 0; i <= 5; i++) {  // 仍然共用i
+            (function(){
+                setTimeout(function timer() {
+                    console.log(i)
+                }, i * 1000)
+            })()
+        }
+        // 改进一
+        for(var i = 0; i <= 5; i++) {
+            (function(){
+                var j = i;
+                setTimeout(function timer() {
+                    console.log(j)
+                }, j * 1000)
+            })()
+        }
+        // 改进二
+        for(var i = 0; i <= 5; i++) {
+            (function(j){
+                setTimeout(function timer() {
+                    console.log(j)
+                }, j * 1000)
+            })(i)
+        }
+    </script>
+</body>
+</html>
