@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="clearTimer()">清除</button>
+    <script>
+        var timer = null
+        function interval(fn, wait) {
+            timer = setTimeout(function() {
+                fn()
+                interval(fn, wait)
+            }, wait)
+            console.log('timer:', timer)
+            // clearTimeout(timer)
+        }
+        interval(function() {
+            console.log(888)
+        }, 1000)
+        function clearTimer() {
+            console.log(11,'>', timer)
+            clearTimeout(timer)
+            console.log(22,'>', timer)
+        }
+    </script>
+</body>
+</html>
