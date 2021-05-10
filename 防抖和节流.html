@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防抖和节流</title>
+</head>
+<body>
+    
+<script>
+    var sleep = function() {
+        console.log(889)
+    }
+    /* var debounce = function(fn) { // 防抖
+        var timer = null
+        return function() {
+            if (timer) {
+                clearTimeout(timer)
+                timer = setTimeout(function() { fn() }, 1000)
+            } else {
+                timer = setTimeout(function() { fn() }, 1000)
+            }
+        }
+        
+    } */
+    var debounce = function(fn) { // 节流
+        var timer = null
+        var valid = true
+        return function() {
+            if (!valid) {
+                return false
+            } 
+            valid = false
+            timer = setTimeout(function() {
+                fn()
+                valid = true
+            }, 2000)
+        }
+        
+    }
+    window.onmousemove = debounce(sleep)
+</script>
+</body>
+</html>
