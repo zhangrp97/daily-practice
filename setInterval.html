@@ -10,7 +10,16 @@
     <button onclick="clearTimer()">清除</button>
     <script>
         var timer = null
+
         function interval(fn, wait) {
+            let inter = function() {
+                fn();
+                timer = setTimeout(inter, timeout);
+            }
+            timer = setTimeout(inter, timeout);
+        }
+
+        /* function interval(fn, wait) {
             timer = setTimeout(function() {
                 fn()
                 interval(fn, wait)
@@ -25,7 +34,7 @@
             console.log(11,'>', timer)
             clearTimeout(timer)
             console.log(22,'>', timer)
-        }
+        } */
     </script>
 </body>
 </html>
