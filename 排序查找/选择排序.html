@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr = [43,11,57,5,2];
+// 升序从小到大
+        function sort(arr) {
+            var len = arr.length;
+            var temp;
+            var min = 0;
+            console.log('👩‍🍳', arr)
+            for(var i = 0; i < len; i++) {
+                for (var j = i + 1; j < len; j++) {
+                    if (arr[j] < arr[min]) {
+                        min = j
+                    }
+                }
+                temp = arr[i]
+                arr[i] = arr[min]
+                arr[min] = temp
+                console.log(arr)
+            }
+        }
+        sort(arr)
+    </script>
+</body>
+</html>

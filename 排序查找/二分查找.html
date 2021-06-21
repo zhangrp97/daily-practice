@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr = [2,4,5]
+        function find(arr, num) {
+            var low = 0;
+            var high = arr.length - 1;
+            while(low <= high) {
+                var mid = Math.floor((low+high)/2)
+                if (arr[mid] < num) {
+                    low = mid + 1
+                } else if (arr[mid] > num) {
+                    high = mid - 1
+                } else if (arr[mid] === num){
+                    return mid
+                }
+            }
+            return -1
+            
+        }
+        console.log(find(arr, 0))
+    </script>
+</body>
+</html>
