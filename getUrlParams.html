@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function getUrlParam(sUrl, sKey) {
+            var params = sUrl.split('?')[1].split('#')[0]
+            // key=1&key=2&key=3&test=4
+            var result = {}
+            var paramsArray = params.split('&')
+            var key, value;
+            paramsArray.forEach(item => {
+                key = item.split('=')[0];
+                value = item.split('=')[1];
+                if (key in result) {
+                    result[key] = [...result[key]]
+                    result[key].push(value)
+                } else {
+                    result[key] = value
+                }
+            })
+            if (sKey) {
+                return result[sKey] || ''
+            } else {
+                return result
+            }
+        }
+        function name() { var a = getUrlParam('http://www.nowcoder.com?key=1&key=2&key=3&key=4&test=4#hehe', 'key'); return a.join('') === '1234'; }
+        
+
+        console.log(name())
+
+    </script>
+</body>
+</html>
