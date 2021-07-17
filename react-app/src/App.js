@@ -1,25 +1,32 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import React from 'react'
+class Example extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      val: 0
+    }
+  }
+  componentDidMount() {
+    this.setState({val: this.state.val + 1});
+    console.log('1>>', this.state.val);
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    this.setState({val: this.state.val + 1});
+    console.log('2>>', this.state.val);
+
+    setTimeout(() => {
+      this.setState({val: this.state.val + 1});
+      console.log('3>>', this.state.val);
+
+      this.setState({val: this.state.val + 1});
+      console.log('4>>', this.state.val);
+    }, 0)
+  }
+  render() {
+    return null;
+  };
 }
 
-export default App;
+
+export default Example;

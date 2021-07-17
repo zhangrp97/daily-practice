@@ -1,0 +1,19 @@
+{
+  "name": "daily-practice",
+  "version": "1.0.0",
+  "description": "日常的代码demo",
+  "main": "async.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pingShare/daily-practice.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pingShare/daily-practice/issues"
+  },
+  "homepage": "https://github.com/pingShare/daily-practice#readme"
+}

@@ -7,23 +7,8 @@
     <title>Document</title>
 </head>
 <body>
-    <pre>
-        let a = 0, b = 0;
-        function fn(a) {
-            fn = function fn2(b) {
-                console.log({a},{b})
-                console.log('++a+b', ++a+b);
-            }
-            console.log('a++', a++);
-        }
-        console.log('fn1', fn)
-        fn(1);
-        console.log('fn2', fn)
-        fn(2);
-    </pre>
-    
     <script>
-        let a = 0, b = 0;
+        /* let a = 0, b = 0;
         function fn(a) {
             fn = function fn2(b) {
                 console.log({a},{b})
@@ -34,7 +19,18 @@
         console.log('fn1', fn)
         fn(1);
         console.log('fn2', fn)
-        fn(2);
+        fn(2); */
+
+       /*  (function a() {
+            console.log(a)
+            a = 100;
+            console.log(a);
+        })(); */
+
+        /* (function(){
+            var a=b=5;
+        })();
+        console.log(a); */
     </script>
 </body>
 </html>
