@@ -17,15 +17,27 @@
     //            resolve(123)
     //    })
     }
+    function getValue() {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('999')
+            }, 2000)
+        })
+    }
     async function main1() {
-        return 1212121
+        console.log('main1 ahead')
+        const a = await getValue()
+        console.log('a', a)
+        // return 1212121
     }
     async function main2 () {
         const data = await main()
         await main1()
     }
-    const aa = main2()
-    console.log(aa.then(res => {console.log(res)}))
+    console.log('start')
+    const aa = main1();
+    console.log('end')
+    // console.log(aa.then(res => {console.log(res)}))
 </script>
 </body>
 </html>
