@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function listDiff(oldList, newList, index, patches) {
+            let oldKeys = getKeys(oldList)
+            let newKeys = getKeys(newList)
+            let changes = []
+            let list = []
+            oldList.forEach(item => {
+                let key = item.key
+                if (isString(item)) {
+                    key = item
+                }
+                // 寻找新的children中是否含有当前节点
+                // 没有的话需要删除
+                let index = newKeys.indexOf(key)
+                if (index === -1) {
+                    list.push(null)
+                } else {
+                    list.push(key)
+                }
+            })
+            for(let i = length -1; i >=0; i--) {
+                if (!list[i]) {
+                    list.splice(i, 1)
+                }
+                changes.push({
+                    type: StateEnums.remove,
+                    index: i
+                })
+            }
+            newList.forEach((item, i) => {
+                let key = item.key
+                if (isString(item)) {
+                    key = item
+                }
+                let index = list.indexOf(key)
+                if (index === -1 || key === null) {
+                    changes.push({
+                        type: insert,
+                        node: item,
+                        index: i,
+                    })
+                } else {
+                    if (index !== i) {
+                        changes.push({
+                            type: move,
+                            from: index,
+                            to: i
+                        })
+                    }
+                }
+            })
+            return { changes, list }
+        }
+        function getKeys(list) {
+            let keys = []
+            let text
+            list.forEach(item => {
+                let key
+                if (isString(item)) {
+                    key = [item]
+                } else if (item instanceof Element) {
+                    key = item.key
+                }
+                keys.push(key)
+            })
+            return keys
+        }
+        function diffChildren(oldChild, newChild, index, patches) {
+            let { changes, list } = listDiff(oldChild, newChild, index, patches)
+            if (changes.length) {
+                if (patches[index]) {
+                    patches[index] = patches[index].concat(changes)
+                } else {
+                    patches[index] = changes
+                }
+            }
+            let last = null
+            oldChild.forEach((item, i) => {
+                let child = item && item.children
+                if (child) {
+                    index = 
+                        last && last.children ? index + last.children.length + 1 : index + 1
+                    let keyIndex = list.indexOf(item.key)
+                    let node = newChild[keyIndex]
+                    if (node) {
+                        dfs(item, node, index, patches)
+                    }
+                } else {
+                    index ++;
+                }
+                last = item
+            })
+        }
+        let index = 0
+        function patch(node, patchs) {
+            let changes = patchs[index]
+            let childNodes = node.childNodes
+            if (!childNodes) index ++;
+            if (changes && changes.length && patchs[index]) {
+                changeDom(node, changes)
+            }
+            let last = null
+            if(childNodes && childNodes.length) {
+                childNodes.forEach((item, i) => {
+                    index =
+                        last && last.chilren ? index + last.chilren.length + 1 : index + 1
+                    patch(item, patchs)
+                    last = item
+                })
+            }
+        }
+        function changeDom(node, changes, noChild) {
+            changes.forEach(change => {
+                let { type } = change
+                switch(type) {
+                    case changeProps: 
+                        let { props } = change
+                        props.forEach(item => {
+                            if (item.value) {
+                                node.setAttribute(item.prop, item.value)
+                            } else {
+                                node.removeAttribute(item.prop)
+                            }
+                        })
+                        break
+                    case remove:
+                        node.childNodes[change.index].remove()
+                        break;
+                    case insert:
+                        let dom
+                        if (isString(change.node)) {
+                            dom = document.createTextNode(change.node)
+                        } else if (change.node instanceof Element) {
+                            dom = change.node.create()
+                        }
+                        break
+                    case replace:
+                        node.parentNode.replaceChild(change.node.create(), node)
+                        break;
+                    case move:
+                        let fromNode = node.childNodes[change.from]
+                        let toNode = node.childNodes[change.to]
+                        let cloneFromNode = fromNode.cloneNode(true)
+                        let cloenToNode = toNode.cloneNode(true)
+                        node.replaceChild(cloneFromNode, toNode)
+                        node.replaceChild(cloenToNode, fromNode)
+                        break
+                }
+            })
+        }
+    </script>
+</body>
+</html>
