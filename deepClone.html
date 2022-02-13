@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>深拷贝</title>
+</head>
+<body>
+    <script>
+        let deepClone = function(arg) {
+            let deep = new arg.constructor();
+            let cache = new Map();
+            if (cache.has(arg)) return cache.get(arg)
+            if (arg === undefined || arg === null || typeof arg === 'string' || typeof arg === 'boolean' || typeof arg === 'number') {
+                deep = arg
+            }
+            if (arg instanceof Array) {
+                arg.forEach(item => {
+                    deep.push(deepClone(item))
+                })
+            }
+            if (arg instanceof Object) {
+                for(let key in arg) {
+                    if (arg.hasOwnProperty) {
+                        deep[key] = deepClone(arg[key])
+                    }
+                }
+            }
+            if (arg instanceof Function) {
+                deep = arg.bind({})
+            }
+
+            cache.set(arg, deep)
+            return deep
+        }
+        // let word = [{a: '4344', b: 42423}, 2434, '244342']
+        let word = function aa() {
+            console.log('aa')
+        }
+        let clone = deepClone(word)
+        // clone[0].a = 'dfdfd'
+        // console.log(word);
+        // clone()
+        console.log(clone)
+
+        let res = clone()
+        console.log(res);
+        console.log(clone === word)
+    </script>
+</body>
+</html>
