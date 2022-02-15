@@ -22,7 +22,7 @@
             }
             if (arg instanceof Object) {
                 for(let key in arg) {
-                    if (arg.hasOwnProperty) {
+                    if (arg.hasOwnProperty(key)) {
                         deep[key] = deepClone(arg[key])
                     }
                 }
